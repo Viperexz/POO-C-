@@ -135,10 +135,10 @@ namespace appAlcancia.Dominio
         /// <summary>
         /// Disocia un objeto de la alcancia con Persona usando el OID.
         /// </summary>
-        /// <param name="prmOid">Valor entero de capacidad monedas.</param>
+        /// <param name="prmOID">Valor entero de capacidad monedas.</param>
         /// <param name="prmObjeto">Valor entero de capacidad billetes.</param>
         /// <returns>Valor booleano</returns
-        private bool disociar(int prmOid,ref clsPersona prmObjeto)
+        private bool disociar(int prmOID,ref clsPersona prmObjeto)
         {
             //Todo -Implementar
             return false;
@@ -172,14 +172,14 @@ namespace appAlcancia.Dominio
         /// <summary>
         /// Recupera un onjeto de la clase persona usando el OID.
         /// </summary>
-        /// <param name="prmOid">Valor entero de capacidad monedas.</param>
+        /// <param name="prmOID">Valor entero de capacidad monedas.</param>
         /// <param name="prmObjeto">Valor entero de capacidad billetes.</param>
         /// <returns>Valor booleano</returns
-        public bool recuperador(int prmOid, ref clsPersona prmObjeto)
+        public bool recuperar(int prmOID, ref clsPersona prmObjeto)
         {
             foreach (clsPersona varObjeto in atrAhorradores)
             {
-                if (varObjeto.darOID() == prmOid)
+                if (varObjeto.darOID() == prmOID)
                 {
                     prmObjeto = varObjeto;
                     return true;
@@ -195,7 +195,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Valor entero de capacidad monedas.</param>
         /// <param name="prmObjeto">Valor entero de capacidad billetes.</param>
         /// <returns>Valor booleano</returns
-        public bool recuperador(int prmDenominacion,ref clsMoneda prmObjeto)
+        public bool recuperar(int prmDenominacion,ref clsMoneda prmObjeto)
         {
             foreach (clsMoneda varObjeto in atrMoneda)
             {
@@ -211,10 +211,10 @@ namespace appAlcancia.Dominio
         /// <summary>
         /// Recupera un onjeto de la clase Billete usando la Denominacion.
         /// </summary>
-        /// <param name="prmOid">Valor entero de capacidad monedas.</param>
+        /// <param name="prmOID">Valor entero de capacidad monedas.</param>
         /// <param name="prmObjeto">Valor entero de capacidad billetes.</param>
         /// <returns>Valor booleano</returns
-        public bool recuperador(int prmDenominacion,ref clsBillete prmObjeto)
+        public bool recuperar(int prmDenominacion,ref clsBillete prmObjeto)
         {
             foreach (clsBillete varObjeto in atrBillete)
             {

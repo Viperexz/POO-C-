@@ -115,9 +115,10 @@ namespace appAlcancia.Dominio
         /// Modifica el nombre de la persona.
         /// </summary>
         /// <param name="prmNombre">Nombre de la persona.</param>
-        public void poner(string prmNombre)
+        public bool poner(string prmNombre)
         {
             atrNombre = prmNombre;
+            return true;
         }
 
         /// <summary>
@@ -186,7 +187,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Denominacion de la moneda.</param>
         /// <param name="prmObjeto">Objeto de la clase Moneda.</param>
         /// <returns>Valor Boleano</returns>
-        public bool recuperador(int prmDenominacion, ref clsMoneda prmObjeto)
+        public bool recuperar(int prmDenominacion, ref clsMoneda prmObjeto)
         {
             foreach (clsMoneda varObjeto in atrMoneda)
             {
@@ -206,7 +207,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Denominacion de la moneda.</param>
         /// <param name="prmObjeto">Objeto de la clase Moneda.</param>
         /// <returns>Valor Boleano</returns>
-        public bool recuperador(int prmDenominacion, ref clsBillete prmObjeto)
+        public bool recuperar(int prmDenominacion, ref clsBillete prmObjeto)
         {
             foreach (clsBillete varObjeto in atrBillete)
             {
