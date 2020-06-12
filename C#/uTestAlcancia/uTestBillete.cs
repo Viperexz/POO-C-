@@ -5,7 +5,9 @@ namespace uTestAlcancia
     [TestClass]
     public class uTetstBillete
     {
+        #region OBJ
         private clsBillete ObjBillete;
+        #endregion
 
         #region testConstructor
         [TestMethod]

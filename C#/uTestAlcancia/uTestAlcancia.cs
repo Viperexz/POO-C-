@@ -5,10 +5,12 @@ namespace uTestAlcancia
     [TestClass]
     public class uTetstAlcancia
     {
+        #region OBJ
         private clsAlcancia ObjAlcancia;
         private clsPersona ObjPersona;
         private clsMoneda ObjMoneda;
         private clsBillete ObjBillete;
+        #endregion
 
         #region testConstructores
 
@@ -26,6 +28,90 @@ namespace uTestAlcancia
             ObjAlcancia = new clsAlcancia(10, 10);
             Assert.AreEqual(10, ObjAlcancia.darCapacidadMoneda());
             Assert.AreEqual(10, ObjAlcancia.darCapacidadBillete());
+        }
+        #endregion
+
+        #region testAccesores
+        [TestMethod]
+        public void uTestdarCapacidadMonedas()
+        {
+            ObjAlcancia = new clsAlcancia();
+            Assert.AreEqual(-1, ObjAlcancia.darCapacidadMoneda());
+        }
+        [TestMethod]
+        public void uTestdarCapacidadBilletes()
+        {
+            ObjAlcancia = new clsAlcancia();
+            Assert.AreEqual(-1, ObjAlcancia.darCapacidadBillete());
+        }
+        #endregion
+
+        #region testAsociar
+        [TestMethod]
+
+        public void uTestAsociarPersona()
+        {
+            clsAlcancia Objeto = new clsAlcancia();
+            Objeto.Generar();
+            clsPersona ObjAsociado = new clsPersona(10031, "Oscar");
+            Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
+            clsPersona ObjEsperado = new clsPersona();
+            Assert.AreEqual(true, Objeto.recuperar(10031, ref ObjEsperado));
+            Assert.AreEqual(ObjEsperado, ObjAsociado);
+        }
+
+        [TestMethod]
+        public void uTestAsociarMoneda()
+        {
+            clsAlcancia Objeto = new clsAlcancia();
+            Objeto.Generar();
+            clsMoneda ObjAsociado = new clsMoneda(200, 2012);
+            Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
+            clsMoneda ObjEsperado = new clsMoneda();
+            Assert.AreEqual(true, Objeto.recuperar(200, ref ObjEsperado));
+            Assert.AreEqual(ObjEsperado, ObjAsociado);
+        }
+        [TestMethod]
+        public void uTestAsociarBillete()
+        {
+            clsAlcancia Objeto = new clsAlcancia();
+            Objeto.Generar();
+            clsBillete ObjAsociado = new clsBillete(10000, 2000, 05, 12, "10031");
+            Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
+            clsBillete ObjEsperado = new clsBillete();
+            Assert.AreEqual(true, Objeto.recuperar(10000, ref ObjEsperado));
+            Assert.AreEqual(ObjEsperado, ObjAsociado);
+        }
+
+        #endregion
+
+        #region testDisociadores
+        [TestMethod]
+        public void uTestDisociarPersona()
+        {
+            clsAlcancia Objeto = new clsAlcancia();
+            Objeto.Generar();
+            clsPersona ObjAsociado = null;
+            Assert.AreEqual(true, Objeto.disociar(10030, ref ObjAsociado));
+            Assert.AreEqual(10030, ObjAsociado.darOID());
+        }
+        [TestMethod]
+        public void uTestDisociarMoneda()
+        {
+            clsAlcancia Objeto = new clsAlcancia();
+            Objeto.Generar();
+            clsMoneda ObjAsociado = null;
+            Assert.AreEqual(true, Objeto.disociar(100, ref ObjAsociado));
+            Assert.AreEqual(100, ObjAsociado.darDenominacion());
+        }
+        [TestMethod]
+        public void uTestDisociarBillete()
+        {
+            clsAlcancia Objeto = new clsAlcancia();
+            Objeto.Generar();
+            clsBillete ObjAsociado = null;
+            Assert.AreEqual(true, Objeto.disociar(1000, ref ObjAsociado));
+            Assert.AreEqual(1000, ObjAsociado.darDenominacion());
         }
         #endregion
 
@@ -64,44 +150,7 @@ namespace uTestAlcancia
         }
         #endregion
 
-        #region testAsociar
-        [TestMethod]
-
-        public void uTestAsociarPersona()
-        {
-            clsAlcancia Objeto = new clsAlcancia();
-            Objeto.Generar();
-            clsPersona ObjAsociado = new clsPersona(10031,"Oscar");
-            Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
-            clsPersona ObjEsperado = new clsPersona();
-            Assert.AreEqual(true, Objeto.recuperar(10031, ref ObjEsperado));
-            Assert.AreEqual(ObjEsperado, ObjAsociado);
-        }
-
-        [TestMethod]
-        public void uTestAsociarMoneda()
-        {
-            clsAlcancia Objeto = new clsAlcancia();
-            Objeto.Generar();
-            clsMoneda ObjAsociado = new clsMoneda(200,2012);
-            Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
-            clsMoneda ObjEsperado = new clsMoneda();
-            Assert.AreEqual(true, Objeto.recuperar(200, ref ObjEsperado));
-            Assert.AreEqual(ObjEsperado, ObjAsociado);
-        }
-        [TestMethod]
-        public void uTestAsociarBillete()
-        {
-            clsAlcancia Objeto = new clsAlcancia();
-            Objeto.Generar();
-            clsBillete ObjAsociado = new clsBillete(10000,2000,05,12,"10031");
-            Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
-            clsBillete ObjEsperado = new clsBillete();
-            Assert.AreEqual(true, Objeto.recuperar(10000, ref ObjEsperado));
-            Assert.AreEqual(ObjEsperado, ObjAsociado);
-        }
-
-        #endregion
+       
 
         
     }

@@ -94,19 +94,19 @@
         /// Asigna dueño a la moneda.
         /// </summary>
         /// <returns>Valor boleano(true/false)</returns>
-        protected bool poner(clsPersona prmObjeto)
+        public bool poner(clsPersona prmObjeto)
         {
             atrPropietario = prmObjeto;    
-            return false;
+            return true;
         }
         /// <summary>
         /// Asigna alcancia a la moneda.
         /// </summary>
         /// <returns>Valor boleano(true/false)</returns>
-        protected bool poner(clsAlcancia prmObjeto)
+        public bool poner(clsAlcancia prmObjeto)
         {
             atrAlcancia = prmObjeto;
-            return false;
+            return true;
         }
         #endregion
 
@@ -119,8 +119,6 @@
 
        
         }
-
-
 
     }
 }

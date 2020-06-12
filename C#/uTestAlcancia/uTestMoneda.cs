@@ -9,6 +9,8 @@ namespace uTestAlcancia
     {
         #region OBJ
         private clsMoneda ObjMoneda;
+        private clsPersona ObjPersona;
+        private clsAlcancia ObjAlcancia;
         #endregion
 
         #region testConstructor
@@ -59,9 +61,25 @@ namespace uTestAlcancia
         #endregion
 
         #region testMutador
+        [TestMethod]
+        public void uTestPonerNombre()
+        {
+            ObjMoneda = new clsMoneda();
+            ObjPersona = new clsPersona();
+            Assert.AreEqual(true, ObjMoneda.poner(ObjPersona));   
+            Assert.AreEqual(ObjPersona, ObjMoneda.darPropietario());
+        }
+
+        [TestMethod]
+        public void uTestPonerAlcancia()
+        {
+            ObjMoneda = new clsMoneda();
+            ObjAlcancia = new clsAlcancia();
+            Assert.AreEqual(true, ObjMoneda.poner(ObjAlcancia));
+            Assert.AreEqual(ObjAlcancia, ObjMoneda.darAlcancia());
+        }
+
         #endregion
-
-
 
 
     }

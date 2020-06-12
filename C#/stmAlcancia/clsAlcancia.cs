@@ -138,7 +138,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID">Valor entero de capacidad monedas.</param>
         /// <param name="prmObjeto">Valor entero de capacidad billetes.</param>
         /// <returns>Valor booleano</returns
-        private bool disociar(int prmOID,ref clsPersona prmObjeto)
+        public bool disociar(int prmOID,ref clsPersona prmObjeto)
         {
             clsPersona varObjeto = null;
             if (recuperar(prmOID, ref varObjeto) == true)
@@ -155,7 +155,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Valor entero de capacidad monedas.</param>
         /// <param name="prmObjeto">Valor entero de capacidad billetes.</param>
         /// <returns>Valor booleano</returns
-        private bool disociar(int prmDenominacion,ref clsMoneda prmObjeto)
+        public bool disociar(int prmDenominacion,ref clsMoneda prmObjeto)
         {
             clsMoneda varObjeto = null;
             if (recuperar(prmDenominacion, ref varObjeto) == true)
@@ -172,7 +172,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Valor entero de capacidad monedas.</param>
         /// <param name="prmObjeto">Valor entero de capacidad billetes.</param>
         /// <returns>Valor booleano</returns
-        private bool disociar(int prmDenominacion,ref clsBillete prmObjeto)
+        public bool disociar(int prmDenominacion,ref clsBillete prmObjeto)
         {
             clsBillete varObjeto = null;
             if (recuperar(prmDenominacion, ref varObjeto) == true)
