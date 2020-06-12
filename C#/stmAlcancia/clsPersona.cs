@@ -67,7 +67,6 @@ namespace appAlcancia.Dominio
         /// <returns>Valor Entero</returns>
         public int darOID() 
         {
-            //Todo -Implementar
             return atrOID; 
         }
         /// <summary>
@@ -76,7 +75,6 @@ namespace appAlcancia.Dominio
         /// <returns>Valor cadena de caracteres</returns>
         public string darNombre() 
         {
-            //Todo -Implementar
             return atrNombre; 
         }
         /// <summary>
@@ -85,7 +83,6 @@ namespace appAlcancia.Dominio
         /// <returns>Valor clase alcancia</returns>
         public clsAlcancia darAlcancia()
         {
-            //Todo -Implementar
             return atrAlcancias;
         }
 
@@ -127,7 +124,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmObjeto">Objeto de la clase Alcancia.</param>
         public void poner(clsAlcancia prmObjeto)
         {
-            //Todo -Implementar
+            atrAlcancias = prmObjeto;
         }
 
         #endregion
@@ -162,9 +159,15 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Denominacion de la moneda.</param>
         /// <param name="prmObjeto">Objeto de la clase moneda.</param>
         /// <returns>Valor Boleano</returns>
-        private bool disociar(int prmDenominacion, ref clsMoneda prmObjeto)
+        public bool disociar(int prmDenominacion, ref clsMoneda prmObjeto)
         {
-            //Todo -Implementar
+            clsMoneda varObjeto = null;
+            if (recuperar(prmDenominacion, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrMoneda.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -173,9 +176,15 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Denominacion del billete.</param>
         /// <param name="prmObjeto">Objeto de la clase billete.</param>
         /// <returns>Valor Boleano</returns>
-        private bool disociar(int prmDenominacion, ref clsBillete prmObjeto)
+        public bool disociar(int prmDenominacion, ref clsBillete prmObjeto)
         {
-            //Todo -Implementar
+            clsBillete varObjeto = null;
+            if (recuperar(prmDenominacion, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrBillete.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         #endregion

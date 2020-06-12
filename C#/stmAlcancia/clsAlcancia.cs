@@ -140,7 +140,13 @@ namespace appAlcancia.Dominio
         /// <returns>Valor booleano</returns
         private bool disociar(int prmOID,ref clsPersona prmObjeto)
         {
-            //Todo -Implementar
+            clsPersona varObjeto = null;
+            if (recuperar(prmOID, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrAhorradores.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -151,7 +157,13 @@ namespace appAlcancia.Dominio
         /// <returns>Valor booleano</returns
         private bool disociar(int prmDenominacion,ref clsMoneda prmObjeto)
         {
-            //Todo -Implementar
+            clsMoneda varObjeto = null;
+            if (recuperar(prmDenominacion, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrMoneda.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -162,7 +174,13 @@ namespace appAlcancia.Dominio
         /// <returns>Valor booleano</returns
         private bool disociar(int prmDenominacion,ref clsBillete prmObjeto)
         {
-            //Todo -Implementar
+            clsBillete varObjeto = null;
+            if (recuperar(prmDenominacion, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrBillete.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         #endregion
@@ -184,7 +202,6 @@ namespace appAlcancia.Dominio
                     prmObjeto = varObjeto;
                     return true;
                 }
-
             }
             return false;
         }

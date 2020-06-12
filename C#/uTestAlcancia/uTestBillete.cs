@@ -7,6 +7,29 @@ namespace uTestAlcancia
     {
         private clsBillete ObjBillete;
 
+        #region testConstructor
+        [TestMethod]
+        public void uTestConstructor()
+        {
+            ObjBillete = new clsBillete();
+            Assert.AreEqual(-1, ObjBillete.darDenominacion());
+            Assert.AreEqual(-1, ObjBillete.darAño());
+            Assert.AreEqual(-1, ObjBillete.darMes());
+            Assert.AreEqual(-1, ObjBillete.darDia());
+            Assert.AreEqual("-1", ObjBillete.darSerial());
+        }
+        [TestMethod]
+        public void uTestConstructorPrm()
+        {
+            ObjBillete = new clsBillete(1000, 2000, 02, 15, "1000");
+            Assert.AreEqual(1000, ObjBillete.darDenominacion());
+            Assert.AreEqual(2000, ObjBillete.darAño());
+            Assert.AreEqual(02, ObjBillete.darMes());
+            Assert.AreEqual(15, ObjBillete.darDia());
+            Assert.AreEqual("1000", ObjBillete.darSerial());
+        }
+        #endregion
+
         #region testAcesor
 
         [TestMethod]
@@ -22,21 +45,6 @@ namespace uTestAlcancia
             Assert.AreEqual(-1, ObjBillete.darDia());
         }
         #endregion
-
-        #region testConstructor
-        [TestMethod]
-        public void uTestConstructorPrm()
-        {
-            ObjBillete = new clsBillete(1000,2000,02,15,"1000");
-            Assert.AreEqual(1000, ObjBillete.darDenominacion());
-            Assert.AreEqual(2000, ObjBillete.darAño());
-            Assert.AreEqual(02, ObjBillete.darMes());
-            Assert.AreEqual(15, ObjBillete.darDia());
-            Assert.AreEqual("1000", ObjBillete.darSerial());
-        }
-        #endregion
-
-
 
     }
 }

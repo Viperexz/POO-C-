@@ -96,7 +96,7 @@
         /// <returns>Valor boleano(true/false)</returns>
         protected bool poner(clsPersona prmObjeto)
         {
-            //Todo -Implementar       
+            atrPropietario = prmObjeto;    
             return false;
         }
         /// <summary>
@@ -105,12 +105,21 @@
         /// <returns>Valor boleano(true/false)</returns>
         protected bool poner(clsAlcancia prmObjeto)
         {
-            //Todo -Implementar       
+            atrAlcancia = prmObjeto;
             return false;
         }
         #endregion
 
         #endregion
+        public void Generar()
+        {
+            atrAlcancia = new clsAlcancia();
+            atrPropietario = new clsPersona(5, "Luis");
+            atrPropietario = new clsPersona(10, "Andres");
+
+       
+        }
+
 
 
     }

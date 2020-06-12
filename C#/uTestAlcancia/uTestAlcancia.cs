@@ -9,7 +9,25 @@ namespace uTestAlcancia
         private clsPersona ObjPersona;
         private clsMoneda ObjMoneda;
         private clsBillete ObjBillete;
- 
+
+        #region testConstructores
+
+        [TestMethod]
+        public void uTestConstructor()
+        {
+            ObjAlcancia = new clsAlcancia();
+            Assert.AreEqual(-1, ObjAlcancia.darCapacidadMoneda());
+            Assert.AreEqual(-1, ObjAlcancia.darCapacidadBillete());
+        }
+
+        [TestMethod]
+        public void uTestConstructorPrm()
+        {
+            ObjAlcancia = new clsAlcancia(10, 10);
+            Assert.AreEqual(10, ObjAlcancia.darCapacidadMoneda());
+            Assert.AreEqual(10, ObjAlcancia.darCapacidadBillete());
+        }
+        #endregion
 
         #region testRecuperadores
 
@@ -85,23 +103,6 @@ namespace uTestAlcancia
 
         #endregion
 
-        #region testConstructores
-
-        [TestMethod]
-        public void uTestConstructor()
-        {
-            ObjAlcancia = new clsAlcancia();
-            Assert.AreEqual(-1, ObjAlcancia.darCapacidadMoneda());
-            Assert.AreEqual(-1, ObjAlcancia.darCapacidadBillete());
-        }
-
-        [TestMethod]
-        public void uTestConstructorPrm()
-        {
-            ObjAlcancia = new clsAlcancia(10,10);
-            Assert.AreEqual(10, ObjAlcancia.darCapacidadMoneda());
-            Assert.AreEqual(10, ObjAlcancia.darCapacidadBillete());
-        }
-        #endregion
+        
     }
 }
