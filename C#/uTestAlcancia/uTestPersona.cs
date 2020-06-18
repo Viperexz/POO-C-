@@ -100,7 +100,7 @@ namespace uTestAlcancia
             clsPersona Objeto = new clsPersona();
             Objeto.Generar();
             clsMoneda ObjAsociado = null;
-            Assert.AreEqual(true, Objeto.disociar(100, ref ObjAsociado));
+            Assert.AreEqual(true, Objeto.disociarMonedaCon(100, ref ObjAsociado));
             Assert.AreEqual(100, ObjAsociado.darDenominacion());
         }
 
@@ -110,7 +110,7 @@ namespace uTestAlcancia
             clsPersona Objeto = new clsPersona();
             Objeto.Generar();
             clsBillete ObjAsociado = null;
-            Assert.AreEqual(true, Objeto.disociar(1000, ref ObjAsociado));
+            Assert.AreEqual(true, Objeto.disociarBilleteCon(1000, ref ObjAsociado));
             Assert.AreEqual(1000, ObjAsociado.darDenominacion());
         }
         #endregion

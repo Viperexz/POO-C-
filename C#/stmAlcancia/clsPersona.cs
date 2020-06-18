@@ -22,12 +22,12 @@ namespace appAlcancia.Dominio
         /// <summary>
         /// Asocia la persona a la clase monedas.
         /// </summary>
-        private List<clsMoneda> atrMoneda = null;
+        private List<clsMoneda> atrMonedas = null;
 
         /// <summary>
         /// Asocia la persona a la clase billetes.
         /// </summary>
-        private List<clsBillete> atrBillete = null;
+        private List<clsBillete> atrBilletes = null;
 
         /// <summary>
         /// Asocia la persona a la clase alcancia.
@@ -35,6 +35,21 @@ namespace appAlcancia.Dominio
         private clsAlcancia atrAlcancias = null;
         #endregion
 
+        #region auxObj
+        /// <summary>
+        /// Atributo Auxiliar de la clase Moneda.
+        /// </summary
+        private clsMoneda auxObjMoneda = null;
+        /// <summary>
+        /// Atributo Auxiliar de la clase Billete.
+        /// </summary
+        private clsBillete auxObjBillete = null;
+        /// <summary>
+        /// Atributo Auxiliar de la clase Moneda.
+        /// </summary
+        private clsAlcancia auxObjAlcancia = null;
+
+        #endregion
         #endregion
         //=================================================
         #region Metodos
@@ -59,7 +74,20 @@ namespace appAlcancia.Dominio
             atrNombre = prmNombre;
         }
         #endregion
-       
+
+        #region Utilitario
+        public void Generar()
+        {
+            atrMonedas = new List<clsMoneda>();
+            atrMonedas.Add(new clsMoneda(100, 1995));
+            atrMonedas.Add(new clsMoneda(500, 2000));
+
+            atrBilletes = new List<clsBillete>();
+            atrBilletes.Add(new clsBillete(1000, 1990, 02, 05, "20000"));
+            atrBilletes.Add(new clsBillete(2000, 2010, 06, 12, "562350"));
+        }
+        #endregion
+
         #region Acessores
         /// <summary>
         /// Devuelve el OID de la persona.
@@ -92,7 +120,7 @@ namespace appAlcancia.Dominio
         /// <returns>Objeto alcancia</returns>
         public List<clsMoneda> darMonedas()
         {
-            return atrMoneda;
+            return atrMonedas;
         }
 
         /// <summary>
@@ -101,7 +129,7 @@ namespace appAlcancia.Dominio
         /// <returns>Objeto alcancia</returns>
         public List<clsBillete> darBillete()
         {
-            return atrBillete;
+            return atrBilletes;
         }
 
 
@@ -137,7 +165,7 @@ namespace appAlcancia.Dominio
         /// <returns>Valor Boleano</returns>
         public bool asociar(clsMoneda prmObjeto)
         {
-            atrMoneda.Add(prmObjeto);
+            atrMonedas.Add(prmObjeto);
             return true;
         }
         /// <summary>
@@ -147,28 +175,38 @@ namespace appAlcancia.Dominio
         /// <returns>Valor Boleano</returns>
         public bool asociar(clsBillete prmObjeto)
         {
-            atrBillete.Add(prmObjeto);
-            return true;
+            if (recuperarBilleteCon(prmObjeto.darDenominacion()) == null)
+            {
+                atrBilletes.Add(prmObjeto);
+                return true;
+            }
+            return false;
         }
         #endregion
 
         #region Disociadores
+        public clsAlcancia disociarAlcancia()
+        {
+            auxObjAlcancia = atrAlcancias;
+            if(auxObjAlcancia != null)
+            {
+                atrAlcancias.disociarAhorradorCon(this);
+                atrAlcancias = null;
+            }
+            return auxObjAlcancia;
+        }
+
         /// <summary>
         /// Disocia la clase personas de la clase Moneda. 
         /// </summary>
         /// <param name="prmDenominacion">Denominacion de la moneda.</param>
         /// <param name="prmObjeto">Objeto de la clase moneda.</param>
         /// <returns>Valor Boleano</returns>
-        public bool disociar(int prmDenominacion, ref clsMoneda prmObjeto)
+        public clsMoneda disociarMonedaCon(int prmDenominacion)
         {
-            clsMoneda varObjeto = null;
-            if (recuperar(prmDenominacion, ref varObjeto) == true)
-            {
-                prmObjeto = varObjeto;
-                return atrMoneda.Remove(prmObjeto);
-            }
-            prmObjeto = null;
-            return false;
+            auxObjMoneda = recuperarMonedaCon(prmDenominacion);
+            atrMonedas.Remove(auxObjMoneda);
+            return auxObjMoneda;
         }
         /// <summary>
         /// Disocia la clase persona de la clase Billete.
@@ -176,71 +214,44 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Denominacion del billete.</param>
         /// <param name="prmObjeto">Objeto de la clase billete.</param>
         /// <returns>Valor Boleano</returns>
-        public bool disociar(int prmDenominacion, ref clsBillete prmObjeto)
+        public clsBillete disociarBilleteCon(int prmDenominacion)
         {
-            clsBillete varObjeto = null;
-            if (recuperar(prmDenominacion, ref varObjeto) == true)
-            {
-                prmObjeto = varObjeto;
-                return atrBillete.Remove(prmObjeto);
-            }
-            prmObjeto = null;
-            return false;
+            auxObjBillete = recuperarBilleteCon(prmDenominacion);
+            atrBilletes.Remove(auxObjBillete);
+            return auxObjBillete;
         }
         #endregion
 
         #region Recuperadores
-        /// <summary>
-        /// Recupera el objeto moneda usando la denominacion.
-        /// </summary>
-        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
-        /// <param name="prmObjeto">Objeto de la clase Moneda.</param>
-        /// <returns>Valor Boleano</returns>
-        public bool recuperar(int prmDenominacion, ref clsMoneda prmObjeto)
+        public clsMoneda recuperarMonedaCon(int prmDenominacion)
         {
-            foreach (clsMoneda varObjeto in atrMoneda)
-            {
-                if (varObjeto.darDenominacion() == prmDenominacion)
-                {
-                    prmObjeto = varObjeto;
-                    return true;
-                }
-
-            }
-            return false;
+            for (int varIndice = 0; varIndice < atrMonedas.Count; varIndice++)
+                if (atrMonedas[varIndice].darDenominacion() == prmDenominacion)
+                    return atrMonedas[varIndice];
+            return null;
         }
-
         /// <summary>
-        /// Recupera el objeto billete usando la denominacion.
+        /// Recupera un onjeto de la clase Billete usando la Denominacion.
         /// </summary>
-        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
-        /// <param name="prmObjeto">Objeto de la clase Moneda.</param>
-        /// <returns>Valor Boleano</returns>
-        public bool recuperar(int prmDenominacion, ref clsBillete prmObjeto)
+        /// <param name="prmOID">Valor entero de capacidad monedas.</param>
+        /// <param name="prmObjeto">Valor entero de capacidad billetes.</param>
+        /// <returns>Valor booleano</returns
+        public clsBillete recuperarBilleteCon(int prmDenominacion)
         {
-            foreach (clsBillete varObjeto in atrBillete)
-            {
-                if (varObjeto.darDenominacion() == prmDenominacion)
-                {
-                    prmObjeto = varObjeto;
-                    return true;
-                }
-
-            }
-            return false;
+            for (int varIndice = 0; varIndice < atrBilletes.Count; varIndice++)
+                if (atrBilletes[varIndice].darDenominacion() == prmDenominacion)
+                    return atrBilletes[varIndice];
+            return null;
         }
         #endregion
 
-
-        public void Generar()
+        public clsPersona destruir()
         {
-            atrMoneda = new List<clsMoneda>();
-            atrMoneda.Add(new clsMoneda(100,1995));
-            atrMoneda.Add(new clsMoneda(500,2000));
-            
-            atrBillete = new List<clsBillete>();
-            atrBillete.Add(new clsBillete(1000,1990,02,05,"20000"));
-            atrBillete.Add(new clsBillete(2000, 2010,06,12,"562350"));
+            disociarAlcancia();
+            disociarBilleteCon();
+            disociarMonedasCon();
+            return this;
+
         }
 
         #endregion

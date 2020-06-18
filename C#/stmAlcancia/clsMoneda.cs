@@ -25,6 +25,24 @@
         /// </summary
         protected clsAlcancia atrAlcancia = null;
         #endregion
+        #region auxObj
+        /// <summary>
+        /// Atributo Auxiliar de la clase Persona.
+        /// </summary
+        private clsPersona auxObjAhorrador = null;
+        /// <summary>
+        /// Atributo Auxiliar de la clase Alcancia.
+        /// </summary
+        private clsAlcancia auxObjAlcancia = null;
+        /// <summary>
+        /// Atributo Auxiliar de la clase Moneda.
+        /// </summary
+        private clsMoneda auxObjMoneda = null;
+        /// <summary>
+        /// Atributo Auxiliar de la clase Billete.
+        /// </summary
+        private clsBillete auxObjBillete = null;
+        #endregion
 
         #endregion
         //=================================================
@@ -47,6 +65,17 @@
         {
             atrDenominacion = prmDenominacion;
             atrAño = prmAño;
+        }
+        #endregion
+
+        #region Utilitario
+        public void Generar()
+        {
+            atrAlcancia = new clsAlcancia();
+            atrPropietario = new clsPersona(5, "Luis");
+            atrPropietario = new clsPersona(10, "Andres");
+
+
         }
         #endregion
 
@@ -89,12 +118,12 @@
 
         #endregion
 
-        #region Mutadores
+        #region Asociadores
         /// <summary>
         /// Asigna dueño a la moneda.
         /// </summary>
         /// <returns>Valor boleano(true/false)</returns>
-        public bool poner(clsPersona prmObjeto)
+        public bool asociarPropietarioCon(clsPersona prmObjeto)
         {
             atrPropietario = prmObjeto;    
             return true;
@@ -103,7 +132,7 @@
         /// Asigna alcancia a la moneda.
         /// </summary>
         /// <returns>Valor boleano(true/false)</returns>
-        public bool poner(clsAlcancia prmObjeto)
+        public bool aosciaAlcanciaCon(clsAlcancia prmObjeto)
         {
             atrAlcancia = prmObjeto;
             return true;
@@ -111,14 +140,7 @@
         #endregion
 
         #endregion
-        public void Generar()
-        {
-            atrAlcancia = new clsAlcancia();
-            atrPropietario = new clsPersona(5, "Luis");
-            atrPropietario = new clsPersona(10, "Andres");
 
        
-        }
-
     }
 }
