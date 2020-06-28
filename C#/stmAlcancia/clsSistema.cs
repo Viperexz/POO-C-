@@ -6,6 +6,9 @@ namespace appAlcancia.Dominio
     {
 
         #region Atributos
+        #region Propios
+        private static clsSistema atrSistema;
+        #endregion
 
         #region Asociativos
         /// <summary>
@@ -26,7 +29,6 @@ namespace appAlcancia.Dominio
         private List<clsBillete> atrBilletes = new List<clsBillete>();
 
         #endregion
-
 
         #region ObjAux
         /// <summary>
@@ -50,28 +52,66 @@ namespace appAlcancia.Dominio
         //=================================================
         #region Metodos
 
-        #region Generar
+        #region generar
 
-        public void Generar()
+        public void generar()
         {
             atrAlcancia = new clsAlcancia();
 
-            atrAhorradores = new List<clsPersona>();
-            atrAhorradores.Add(new clsPersona(5, "Luis"));
-            atrAhorradores.Add(new clsPersona(10, "Andres"));
-
             atrMonedas = new List<clsMoneda>();
+            atrMonedas.Add(new clsMoneda(50, 1990));
             atrMonedas.Add(new clsMoneda(100, 1995));
             atrMonedas.Add(new clsMoneda(500, 2000));
+            atrMonedas.Add(new clsMoneda(100, 2000));
 
             atrBilletes = new List<clsBillete>();
-            atrBilletes.Add(new clsBillete(1000, 1990, 02, 05, "20000"));
-            atrBilletes.Add(new clsBillete(2000, 2010, 06, 12, "562350"));
+            atrBilletes.Add(new clsBillete("5",5000,1,12,1996));
+            atrBilletes.Add(new clsBillete("7",5000,1,12,1996));
+            atrBilletes.Add(new clsBillete("4",10000,1,12,2000));
+            atrBilletes.Add(new clsBillete("1",20000,6,5,2007));
+
+            atrAhorradores = new List<clsPersona>();
+            atrAhorradores.Add(new clsPersona(1, "Fulanito"));
+            atrAhorradores.Add(new clsPersona(2, "Menganito"));
+            atrAhorradores.Add(new clsPersona(5, "Diana"));
+
+            atrAhorradores[2].asociarAlcanciaCon(atrAlcancia);
+            atrAlcancia.asociarAhorradorCon(atrAhorradores[2]);
+
+            atrAhorradores[2].asociarMonedaCon(atrMonedas[0]);
+            atrAhorradores[2].asociarMonedaCon(atrMonedas[3]);
+            atrAhorradores[2].asociarBilleteCon(atrBilletes[0]);
+            atrAhorradores[2].asociarBilleteCon(atrBilletes[2]);
+
+            atrMonedas[0].asociarPropietarioCon(atrAhorradores[2]);
+            atrMonedas[3].asociarPropietarioCon(atrAhorradores[2]);
+            atrBilletes[0].asociarPropietarioCon(atrAhorradores[2]);
+            atrBilletes[2].asociarPropietarioCon(atrAhorradores[2]);
+
+            atrAlcancia.asociarMonedaCon(atrMonedas[0]);
+            atrAlcancia.asociarMonedaCon(atrMonedas[3]);
+            atrAlcancia.asociarBilleteCon(atrBilletes[0]);
+            atrAlcancia.asociarBilleteCon(atrBilletes[2]);
+
+            atrMonedas[0].asociarAlcanciaCon(atrAlcancia);
+            atrMonedas[3].asociarAlcanciaCon(atrAlcancia);
+            atrBilletes[3].asociarAlcanciaCon(atrAlcancia);
+            atrBilletes[3].asociarAlcanciaCon(atrAlcancia);
         }
 
         #endregion
 
         #region Acessores
+
+        public static clsSistema darSistema()
+        {
+            if(atrSistema == null)
+            {
+                atrSistema = new clsSistema();
+                return atrSistema;
+            }
+            return null;
+        }
 
         /// <summary>
         /// Devuelve el objeto de la clase alcancia.
@@ -81,6 +121,7 @@ namespace appAlcancia.Dominio
         {
             return atrAlcancia;
         }
+
         /// <summary>
         /// Devuelve una copia de la coleccion de la clase monedas.
         /// </summary>
@@ -94,146 +135,20 @@ namespace appAlcancia.Dominio
         /// Devuelve una copia de la coleccion de la clase monedas.
         /// </summary>
         /// <returns>Objeto alcancia</returns>
-        public List<clsBillete> darBillete()
+        public List<clsPersona> darAhorradores()
         {
-            return atrBilletes;
+            return atrAhorradores;
         }
-       
 
         /// <summary>
         /// Devuelve una copia de la coleccion de la clase monedas.
         /// </summary>
         /// <returns>Objeto alcancia</returns>
-        public List<clsPersona> darAhorradores()
+        public List<clsBillete> darBilletes()
         {
-            return atrAhorradores;
-        }
-       
-
-        #endregion
-
-       
-
-        #region Mutadores
-        /// <summary>
-        /// Modifica el objeto alcancia.
-        /// </summary>
-        /// <returns>Valor boleano(true/false)</returns>
-        public bool poner(clsAlcancia prmObjeto)
-        {
-            atrAlcancia = prmObjeto;
-            return true;
+            return atrBilletes;
         }
 
-        #endregion
-
-        #region Asociadores
-        /// <summary>
-        /// Asocia la clase persona.
-        /// </summary>
-        /// <param name="prmObjeto">Objeto de la clase persona.</param>
-        /// <returns>Valor Boleano</returns>
-        public bool asociarAhorradorCon(clsPersona prmObjeto)
-        {
-            if (recuperarAhorradorCon(prmObjeto.darOID()) == null)
-            {
-                atrAhorradores.Add(prmObjeto);
-                return true;
-            }
-            return false;
-
-        }
-
-        /// <summary>
-        /// Asocia la clase moneda.
-        /// </summary>
-        /// <param name="prmObjeto">Objeto de la clase Moneda.</param>
-        /// <returns>Valor Boleano</returns>
-        public bool asociarMonedaCon(clsMoneda prmObjeto)
-        {
-                atrMonedas.Add(prmObjeto);
-                return true;
-        }
-
-        /// <summary>
-        /// Asocia la clase billete.
-        /// </summary>
-        /// <param name="prmObjeto">Objeto de la clase Billete.</param>
-        /// <returns>Valor Boleano</returns>
-        public bool asociarBilleteCon(clsBillete prmObjeto)
-        {
-            if (recuperarBilleteCon(prmObjeto.darDenominacion()) == null)
-            {
-                atrBilletes.Add(prmObjeto);
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Asocia la clase Alcancia.
-        /// </summary>
-        /// <param name="prmObjeto">Objeto de la clase Alcancia.</param>
-        public bool asociar(clsAlcancia prmObjeto)
-        {
-            return false;
-        }
-
-        #endregion
-
-        #region Disociadores
-        
-        /// <summary>
-        /// Disocia la clase personas de la clase Moneda. 
-        /// </summary>
-        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
-        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
-        /// <returns>Valor Boleano</returns>
-        public clsPersona disociarAhorradorCon(int prmOID)
-        {
-            auxObjAhorrador = recuperarAhorradorCon(prmOID);
-            atrAhorradores.Remove(auxObjAhorrador);
-            return auxObjAhorrador;
-        }
-
-        /// <summary>
-        /// Disocia la clase personas de la clase Moneda. 
-        /// </summary>
-        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
-        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
-        /// <returns>Valor Boleano</returns>
-        public clsMoneda disociarMonedaCon(int prmDenominacion)
-        {
-            auxObjMoneda = recuperarMonedaCon(prmDenominacion);
-            atrMonedas.Remove(auxObjMoneda);
-            return auxObjMoneda;
-        }
-
-        /// <summary>
-        /// Disocia la clase personas de la clase Moneda. 
-        /// </summary>
-        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
-        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
-        /// <returns>Valor Boleano</returns>
-        public clsBillete disociarBilleteCon(int prmDenominacion)
-        {
-            auxObjBillete = recuperarBilleteCon(prmDenominacion);
-            atrBilletes.Remove(auxObjBillete);
-            return auxObjBillete;
-        }
-
-        /// <summary>
-        /// Disocia la clase personas de la clase Moneda. 
-        /// </summary>
-        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
-        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
-        /// <returns>Valor Boleano</returns>
-        public clsBillete disociarBilleteCon(string prmSerial)
-        {
-            auxObjBillete = recuperarBilleteCon(prmSerial);
-            atrBilletes.Remove(auxObjBillete);
-            return auxObjBillete;
-        }
         #endregion
 
         #region Recuperadores
@@ -293,9 +208,133 @@ namespace appAlcancia.Dominio
         }
         #endregion
 
+        #region Asociadores
+
+        /// <summary>
+        /// Asocia la clase Alcancia.
+        /// </summary>
+        /// <param name="prmObjeto">Objeto de la clase Alcancia.</param>
+        public bool asociarAlcanciaCon(clsAlcancia prmObjeto)
+        {
+            atrAlcancia = prmObjeto;
+            return true;
+        }
+
+        /// <summary>
+        /// Asocia la clase persona.
+        /// </summary>
+        /// <param name="prmObjeto">Objeto de la clase persona.</param>
+        /// <returns>Valor Boleano</returns>
+        public bool asociarAhorradorCon(clsPersona prmObjeto)
+        {
+            if (recuperarAhorradorCon(prmObjeto.darOID()) == null)
+            {
+                atrAhorradores.Add(prmObjeto);
+                return true;
+            }
+            return false;
+
+        }
+        /// <summary>
+        /// Asocia la clase moneda.
+        /// </summary>
+        /// <param name="prmObjeto">Objeto de la clase Moneda.</param>
+        /// <returns>Valor Boleano</returns>
+        public bool asociarMonedaCon(clsMoneda prmObjeto)
+        {
+                atrMonedas.Add(prmObjeto);
+                return true;
+        }
+
+        /// <summary>
+        /// Asocia la clase billete.
+        /// </summary>
+        /// <param name="prmObjeto">Objeto de la clase Billete.</param>
+        /// <returns>Valor Boleano</returns>
+        public bool asociarBilleteCon(clsBillete prmObjeto)
+        {
+            if (recuperarBilleteCon(prmObjeto.darDenominacion()) == null)
+            {
+                atrBilletes.Add(prmObjeto);
+                return true;
+            }
+            return false;
+        }
+        
+
+        #endregion
+
+        #region Disociadores
+
+        /// <summary>
+        /// Disocia la clase personas de la clase Moneda. 
+        /// </summary>
+        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
+        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
+        /// <returns>Valor Boleano</returns>
+        public clsPersona disociarAhorradorCon(int prmOID)
+        {
+            auxObjAhorrador = recuperarAhorradorCon(prmOID);
+            atrAhorradores.Remove(auxObjAhorrador);
+            return auxObjAhorrador;
+        }
+
+        /// <summary>
+        /// Disocia la clase personas de la clase alcancia. 
+        /// </summary>
+        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
+        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
+        /// <returns>Valor Boleano</returns>
+        public clsAlcancia disociarAlcancia()
+        {
+            auxObjAlcancia = atrAlcancia;
+            atrAlcancia = null;
+            return auxObjAlcancia;
+        }
+
+        /// <summary>
+        /// Disocia la clase personas de la clase Moneda. 
+        /// </summary>
+        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
+        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
+        /// <returns>Valor Boleano</returns>
+        public clsMoneda disociarMonedaCon(int prmDenominacion)
+        {
+            auxObjMoneda = recuperarMonedaCon(prmDenominacion);
+            atrMonedas.Remove(auxObjMoneda);
+            return auxObjMoneda;
+        }
+
+        /// <summary>
+        /// Disocia la clase personas de la clase Moneda. 
+        /// </summary>
+        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
+        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
+        /// <returns>Valor Boleano</returns>
+        public clsBillete disociarBilleteCon(int prmDenominacion)
+        {
+            auxObjBillete = recuperarBilleteCon(prmDenominacion);
+            atrBilletes.Remove(auxObjBillete);
+            return auxObjBillete;
+        }
+
+        /// <summary>
+        /// Disocia la clase personas de la clase Moneda. 
+        /// </summary>
+        /// <param name="prmDenominacion">Denominacion de la moneda.</param>
+        /// <param name="prmObjeto">Objeto de la clase moneda.</param>
+        /// <returns>Valor Boleano</returns>
+        public clsBillete disociarBilleteCon(string prmSerial)
+        {
+            auxObjBillete = recuperarBilleteCon(prmSerial);
+            atrBilletes.Remove(auxObjBillete);
+            return auxObjBillete;
+        }
+        #endregion
+
         #region CRUD
 
-        #region Registrar
+        #region Registrardores
 
         /// <summary>
         /// Registra la alcancia.
@@ -303,9 +342,9 @@ namespace appAlcancia.Dominio
         /// <param name="prmCapacidadMonedas">Capacidad de la alancia para las monedas.</param>
         /// <param name="prmCapacidadBilletes">Capacidad de la alancia para los billetes.</param>
         /// <returns>Valor Boleano</returns>
-        public bool registrarAlcancia(int prmCapacidadMonedas, int prmCapacidadBilletes)
+        public bool registrarAlcanciaCon(int prmCapacidadMonedas, int prmCapacidadBilletes)
         {
-             return poner(new clsAlcancia(prmCapacidadMonedas, prmCapacidadBilletes));
+             return asociarAlcanciaCon(new clsAlcancia(prmCapacidadMonedas, prmCapacidadBilletes));
         }
 
         /// <summary>
@@ -314,7 +353,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID">Capacidad de la alancia para las monedas.</param>
         /// <param name="prmNombre">Capacidad de la alancia para los billetes.</param>
         /// <returns>Valor Boleano</returns>
-        public bool registrarPersona(int prmOID, string prmNombre)
+        public bool registrarAhorradorCon(int prmOID, string prmNombre)
         {
             return asociarAhorradorCon(new clsPersona(prmOID, prmNombre)); 
         }
@@ -325,7 +364,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Denominacion de la moneda. </param>
         /// <param name="prmAno">Año de emision del la moneda.</param>
         /// <returns>Valor Boleano</returns>
-        public bool registrarMoneda(int prmDenominacion, int prmAño)
+        public bool registrarMonedaCon(int prmDenominacion, int prmAño)
         {
             return asociarMonedaCon(new clsMoneda(prmDenominacion,prmAño));
         }
@@ -338,13 +377,13 @@ namespace appAlcancia.Dominio
         /// <param name="prmMes">Mes de emision.</param>
         /// <param name="prmDia">Dia de emision.</param>
         /// <returns>Valor Boleano</returns>
-        public bool registrarBillete(int prmDenominacion, int prmAño, int prmMes, int prmDia, string prmSerial)
+        public bool registrarBilleteCon(string prmSerial, int prmDenominacion, int prmDia, int prmMes, int prmAño)
         {
-            return asociarBilleteCon(new clsBillete(prmDenominacion,prmAño,prmMes,prmDia,prmSerial));
+            return asociarBilleteCon(new clsBillete(prmSerial,prmDenominacion,prmDia,prmMes,prmAño));
         }
         #endregion
 
-        #region Actualizar
+        #region Actualizadores
 
         /// <summary>
         /// Actualiza la persona.
@@ -352,16 +391,29 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID">Capacidad de la alancia para las monedas.</param>
         /// <param name="prmNombre">Capacidad de la alancia para los billetes.</param>
         /// <returns>Valor Boleano</returns>
-        public bool actualizarPersona(int prmOID, string prmNombre)
+        public bool actualizarAhorradorCon(int prmOID, string prmNombre)
         {
-            if(recuperarAhorradorCon(prmOID).poner(prmNombre)) return true;
+            if(recuperarAhorradorCon(prmOID).ponerNombre(prmNombre)) return true;
 
             return false;
         }
 
         #endregion
 
-        #region Eliminar
+        #region Eliminadores
+
+        /// <summary>
+        /// Elimina la moneda usando la alcancia.
+        /// </summary>
+        /// <param name="prmObjeto">Objeto de la clase.</param>
+        /// <returns>Valor Boleano</returns>
+        public clsAlcancia eliminarAlcancia()
+        {
+            auxObjAlcancia = disociarAlcancia();
+            if (auxObjAhorrador != null)
+                return auxObjAlcancia.destruir();
+            return null;
+        }
 
         /// <summary>
         /// Elimina la persona usando el OID.
@@ -369,12 +421,11 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID">Capacidad de la alancia para las monedas.</param>
         /// <param name="prmObjeto">Objeto de la clase personas.</param>
         /// <returns>Valor Boleano</returns>
-        public clsPersona eliminarPersona(int prmOID)
+        public clsPersona eliminarAhorradorCon(int prmOID)
         {
             auxObjAhorrador = disociarAhorradorCon(prmOID);
             if (auxObjAhorrador != null)
                 return auxObjAhorrador.destruir();
-
             return null;
         }
 
@@ -384,9 +435,12 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Denominacion de la moneda. </param>
         /// <param name="prmObjeto">Objeto de la clase.</param>
         /// <returns>Valor Boleano</returns
-        public bool eliminarMoneda(int prmDenominacion)
+        public clsMoneda eliminarMonedaCon(int prmDenominacion)
         {
-            return false;
+            auxObjMoneda = disociarMonedaCon(prmDenominacion);
+            if (auxObjAhorrador != null)
+                return auxObjMoneda.destruir();
+            return null;
         }
 
         /// <summary>
@@ -395,24 +449,16 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion">Denominacion del billete.</param>
         /// <param name="prmObjeto">Objeto de la clase.</param>
         /// <returns>Valor Boleano</returns>
-        public bool eliminarBillete(int prmDenominacion)
+        public clsBillete eliminarBilleteCon(int prmDenominacion)
         {
-            return false;
+            auxObjBillete = disociarBilleteCon(prmDenominacion);
+            if (auxObjAhorrador != null)
+                return auxObjBillete.destruir();
+            return null;
         }
-        /// <summary>
-        /// Elimina la moneda usando la alcancia.
-        /// </summary>
-        /// <param name="prmObjeto">Objeto de la clase.</param>
-        /// <returns>Valor Boleano</returns>
-        public bool eliminarAlcancia(ref clsAlcancia prmObjeto)
-        {
-            return false;
-        }
-        #endregion
-
 
         #endregion
-
+        #endregion
         #endregion
     }
 }

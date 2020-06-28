@@ -17,7 +17,7 @@ namespace uTestAlcancia
         public void uTestdarAlcancia()
         {
             ObjSistema = new clsSistema();
-            ObjSistema.Generar();
+            ObjSistema.generar();
             Assert.AreNotEqual(null, ObjSistema.darAlcancia());
         }
 
@@ -26,7 +26,7 @@ namespace uTestAlcancia
         {
             ObjSistema = new clsSistema();
             ObjPersona = new clsPersona();
-            ObjSistema.Generar();
+            ObjSistema.generar();
             Assert.AreEqual(false, ObjSistema.recuperarAhorradorCon(10031));
         }
         #endregion
@@ -36,7 +36,7 @@ namespace uTestAlcancia
         public void uTestRecuperarMoneda()
         {
             ObjSistema = new clsSistema();
-            ObjSistema.Generar();
+            ObjSistema.generar();
             ObjMoneda = new clsMoneda();
             Assert.AreEqual(true, ObjSistema.recuperarMonedaCon(500));
         }
@@ -47,7 +47,7 @@ namespace uTestAlcancia
         {
             ObjSistema = new clsSistema();
             ObjBillete = new clsBillete();
-            ObjSistema.Generar();
+            ObjSistema.generar();
             Assert.AreNotEqual(false, ObjSistema.recuperarBilleteCon(1000));
             Assert.AreNotEqual(null, ObjSistema.recuperarBilleteCon(1000));
 
@@ -60,7 +60,7 @@ namespace uTestAlcancia
         public void uTestAsociarNuevaPersona()
         {
             clsSistema Objeto = new clsSistema();
-            Objeto.Generar();
+            Objeto.generar();
             Assert.AreEqual(true, Objeto.asociarAhorradorCon(new clsPersona()));
             Assert.AreEqual(true, Objeto.recuperarAhorradorCon(-1));
         }
@@ -70,7 +70,7 @@ namespace uTestAlcancia
         public void uTestAsociarPersonaExistente()
         {
             clsSistema Objeto = new clsSistema();
-            Objeto.Generar();
+            Objeto.generar();
             Assert.AreEqual(true, Objeto.asociarAhorradorCon(new clsPersona(10031,"Pablo")));
             Assert.AreEqual(true, Objeto.recuperarAhorradorCon(10031));
             Assert.AreEqual("Pablo", ObjPersona.darNombre());
@@ -81,7 +81,7 @@ namespace uTestAlcancia
         public void uTestAsociarMoneda()
         {
             clsSistema Objeto = new clsSistema();
-            Objeto.Generar();
+            Objeto.generar();
             clsMoneda ObjAsociado = new clsMoneda(200, 2012);
             Assert.AreEqual(true, Objeto.asociarMonedaCon(ObjAsociado));
             clsMoneda ObjEsperado = new clsMoneda();
@@ -92,9 +92,9 @@ namespace uTestAlcancia
         public void uTestAsociarBilleteNuevo()
         {
             clsSistema Objeto = new clsSistema();
-            Objeto.Generar();
+            Objeto.generar();
             Assert.AreEqual(true, Objeto.asociarBilleteCon(new clsBillete()));
-            Assert.AreEqual(true, Objeto.recuperarBilleteCon(-1));
+            Assert.AreEqual(Objeto, Objeto.recuperarBilleteCon(-1));
         }
 
         #endregion
@@ -104,7 +104,7 @@ namespace uTestAlcancia
         public void uTestDisociarMonedasDenominacion()
         {
             clsSistema Objeto = new clsSistema();
-            Objeto.Generar();
+            Objeto.generar();
             clsMoneda ObjAsociado = null;
             Assert.AreNotEqual(null, Objeto.disociarMonedaCon(100));
             Assert.AreEqual(100, ObjAsociado.darDenominacion());
@@ -118,16 +118,16 @@ namespace uTestAlcancia
         public void utestRegistrarAlcancia()
         {
             ObjSistema = new clsSistema();
-            ObjSistema.registrarAlcancia(400, 100);
-            Assert.AreEqual(true, ObjSistema.registrarAlcancia(400, 100));
-            Assert.AreEqual(400, ObjSistema.darAlcancia().darCapacidadMoneda());
-            Assert.AreEqual(100, ObjSistema.darAlcancia().darCapacidadBillete());
+            ObjSistema.registrarAlcanciaCon(400, 100);
+            Assert.AreEqual(true, ObjSistema.registrarAlcanciaCon(400, 100));
+            Assert.AreEqual(400, ObjSistema.darAlcancia().darCapacidadMonedas());
+            Assert.AreEqual(100, ObjSistema.darAlcancia().darCapacidadBilletes());
         }
         [TestMethod]
         public void utestRegistrarPersonaConOID()
         {
             ObjSistema = new clsSistema();
-            Assert.AreEqual(true, ObjSistema.registrarPersona(0031, "Javier"));
+            Assert.AreEqual(true, ObjSistema.registrarAhorradorCon(0031, "Javier"));
             Assert.AreEqual(true, ObjSistema.recuperarAhorradorCon(0031));
         }
 
@@ -135,7 +135,7 @@ namespace uTestAlcancia
         public void utestRegistrarMoneda()
         {
             ObjSistema = new clsSistema();
-            Assert.AreEqual(true, ObjSistema.registrarMoneda(100, 1999));
+            Assert.AreEqual(true, ObjSistema.registrarMonedaCon(100, 1999));
             Assert.AreEqual(true, ObjSistema.recuperarMonedaCon(100));
         }
 
@@ -143,7 +143,7 @@ namespace uTestAlcancia
         public void utestRegistrarBillete()
         {
             ObjSistema = new clsSistema();
-            Assert.AreEqual(true, ObjSistema.registrarBillete(10000,2000,05,06,"103194"));
+            Assert.AreEqual(true, ObjSistema.registrarBilleteCon("103194",10000,2000,05,06));
             Assert.AreEqual(true, ObjSistema.recuperarBilleteCon("103194"));
         }
         #endregion
@@ -153,8 +153,8 @@ namespace uTestAlcancia
         public void utestActualizarPersona()
         {
             ObjSistema = new clsSistema();
-            ObjSistema.Generar();
-            Assert.AreEqual(true,ObjSistema.actualizarPersona(5,"Jaime"));
+            ObjSistema.generar();
+            Assert.AreEqual(true,ObjSistema.actualizarAhorradorCon(5,"Jaime"));
             Assert.AreEqual("Jaime", ObjSistema.recuperarAhorradorCon(5).darNombre());
         }
         #endregion

@@ -1,0 +1,11 @@
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\bin\Debug\appConsola.exe.config
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\bin\Debug\appConsola.exe
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\bin\Debug\appConsola.pdb
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\bin\Debug\libAlcancia.dll
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\bin\Debug\libAlcancia.pdb
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\bin\Debug\libAlcancia.dll.config
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\obj\Debug\appConsola.csprojAssemblyReference.cache
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\obj\Debug\appConsola.csproj.CoreCompileInputs.cache
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\obj\Debug\appConsola.csproj.CopyComplete
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\obj\Debug\appConsola.exe
+D:\Proyectos\GitHub\POO-C-\C#\appConsola\obj\Debug\appConsola.pdb

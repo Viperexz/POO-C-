@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stmaAlcancia", "stmaAlcanci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uTestAlcancia", "..\uTestAlcancia\uTestAlcancia.csproj", "{92EDCFB1-0290-4E2E-A787-2DD6EEF5A35F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "appConsola", "..\appConsola\appConsola.csproj", "{090A682C-1A8C-47F8-9C12-E8DDFB2C793F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{92EDCFB1-0290-4E2E-A787-2DD6EEF5A35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92EDCFB1-0290-4E2E-A787-2DD6EEF5A35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92EDCFB1-0290-4E2E-A787-2DD6EEF5A35F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{090A682C-1A8C-47F8-9C12-E8DDFB2C793F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{090A682C-1A8C-47F8-9C12-E8DDFB2C793F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{090A682C-1A8C-47F8-9C12-E8DDFB2C793F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{090A682C-1A8C-47F8-9C12-E8DDFB2C793F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

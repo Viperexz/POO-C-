@@ -27,7 +27,6 @@ D:\Proyectos\GuitHub\POO1\C#\stmAlcancia\obj\Debug\libAlcancia.pdb
 D:\Proyectos\GitHub\POO-C-\C#\stmAlcancia\bin\Debug\libAlcancia.dll.config
 D:\Proyectos\GitHub\POO-C-\C#\stmAlcancia\bin\Debug\libAlcancia.dll
 D:\Proyectos\GitHub\POO-C-\C#\stmAlcancia\bin\Debug\libAlcancia.pdb
-D:\Proyectos\GitHub\POO-C-\C#\stmAlcancia\obj\Debug\stmaAlcancia.csprojAssemblyReference.cache
 D:\Proyectos\GitHub\POO-C-\C#\stmAlcancia\obj\Debug\stmaAlcancia.csproj.CoreCompileInputs.cache
 D:\Proyectos\GitHub\POO-C-\C#\stmAlcancia\obj\Debug\libAlcancia.dll
 D:\Proyectos\GitHub\POO-C-\C#\stmAlcancia\obj\Debug\libAlcancia.pdb

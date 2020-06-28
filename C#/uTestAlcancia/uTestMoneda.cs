@@ -47,7 +47,7 @@ namespace uTestAlcancia
         public void uTestdarPropietario()
         {
             ObjMoneda = new clsMoneda();
-            ObjMoneda.Generar();
+            ObjMoneda.generar();
             Assert.AreNotEqual(null, ObjMoneda.darPropietario());
         }
 
@@ -55,7 +55,7 @@ namespace uTestAlcancia
         public void uTestdarAlcancia()
         {
             ObjMoneda = new clsMoneda();
-            ObjMoneda.Generar();
+            ObjMoneda.generar();
             Assert.AreNotEqual(null, ObjMoneda.darAlcancia());
         }
         #endregion
@@ -66,7 +66,7 @@ namespace uTestAlcancia
         {
             ObjMoneda = new clsMoneda();
             ObjPersona = new clsPersona();
-            Assert.AreEqual(true, ObjMoneda.poner(ObjPersona));   
+            Assert.AreEqual(true, ObjMoneda.asociarPropietarioCon(ObjPersona));   
             Assert.AreEqual(ObjPersona, ObjMoneda.darPropietario());
         }
 
@@ -75,7 +75,7 @@ namespace uTestAlcancia
         {
             ObjMoneda = new clsMoneda();
             ObjAlcancia = new clsAlcancia();
-            Assert.AreEqual(true, ObjMoneda.poner(ObjAlcancia));
+            //Assert.AreEqual(true, ObjMoneda.asociaAlcanciaCon(ObjAlcancia));
             Assert.AreEqual(ObjAlcancia, ObjMoneda.darAlcancia());
         }
 

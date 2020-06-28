@@ -25,28 +25,34 @@
         /// </summary
         protected clsAlcancia atrAlcancia = null;
         #endregion
+
         #region auxObj
         /// <summary>
         /// Atributo Auxiliar de la clase Persona.
         /// </summary
-        private clsPersona auxObjAhorrador = null;
+        private clsPersona auxObjPropietario = null;
         /// <summary>
         /// Atributo Auxiliar de la clase Alcancia.
         /// </summary
         private clsAlcancia auxObjAlcancia = null;
-        /// <summary>
-        /// Atributo Auxiliar de la clase Moneda.
-        /// </summary
-        private clsMoneda auxObjMoneda = null;
-        /// <summary>
-        /// Atributo Auxiliar de la clase Billete.
-        /// </summary
-        private clsBillete auxObjBillete = null;
+      
         #endregion
 
         #endregion
         //=================================================
         #region Metodos
+
+        #region Utilitario
+        public void generar()
+        {
+
+            atrDenominacion = 500;
+            atrAño = 1980;
+            atrAlcancia = new clsAlcancia();
+            atrPropietario = new clsPersona();
+
+        }
+        #endregion
 
         #region Constructor
         /// <summary>
@@ -68,27 +74,7 @@
         }
         #endregion
 
-        #region Utilitario
-        public void Generar()
-        {
-            atrAlcancia = new clsAlcancia();
-            atrPropietario = new clsPersona(5, "Luis");
-            atrPropietario = new clsPersona(10, "Andres");
-
-
-        }
-        #endregion
-
         #region Acessores
-        /// <summary>
-        /// Devuelve el año de emision de la moneda.
-        /// </summary>
-        /// <returns>Valor Entero</returns>
-        public int darAño()
-        {
-            return atrAño;
-        }
-
         /// <summary>
         /// Devuelve la denominacion de la moneda.
         /// </summary>
@@ -96,6 +82,15 @@
         public int darDenominacion()
         {
             return atrDenominacion;
+        }
+
+        /// <summary>
+        /// Devuelve el año de emision de la moneda.
+        /// </summary>
+        /// <returns>Valor Entero</returns>
+        public int darAño()
+        {
+            return atrAño;
         }
 
         /// <summary>
@@ -132,15 +127,40 @@
         /// Asigna alcancia a la moneda.
         /// </summary>
         /// <returns>Valor boleano(true/false)</returns>
-        public bool aosciaAlcanciaCon(clsAlcancia prmObjeto)
+        public bool asociarAlcanciaCon(clsAlcancia prmObjeto)
         {
             atrAlcancia = prmObjeto;
             return true;
         }
         #endregion
 
+        #region Disociadores
+        public clsPersona disociarPropietario()
+        {
+            auxObjPropietario = atrPropietario;
+            atrPropietario = null;
+            return auxObjPropietario;
+        }
+        public clsAlcancia disociarAlcancia()
+        {
+            auxObjAlcancia = atrAlcancia;
+            atrAlcancia = null;
+            return auxObjAlcancia;
+        }
+
         #endregion
 
-       
+        #region Destructor
+        public clsMoneda destruir()
+        {
+            disociarAlcancia();
+            disociarPropietario();
+            return this;
+        }
+        #endregion
+
+        #endregion
+
+
     }
 }

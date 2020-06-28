@@ -23,7 +23,7 @@ namespace uTestAlcancia
         [TestMethod]
         public void uTestConstructorPrm()
         {
-            ObjBillete = new clsBillete(1000, 2000, 02, 15, "1000");
+            ObjBillete = new clsBillete("1000", 1000, 2000, 02, 15);
             Assert.AreEqual(1000, ObjBillete.darDenominacion());
             Assert.AreEqual(2000, ObjBillete.darAño());
             Assert.AreEqual(02, ObjBillete.darMes());

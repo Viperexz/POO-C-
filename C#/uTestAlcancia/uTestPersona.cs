@@ -52,7 +52,7 @@ namespace uTestAlcancia
         public void uTestPonerNombre()
         {
             ObjPersona = new clsPersona();
-            ObjPersona.poner("Luis");
+            ObjPersona.ponerNombre("Luis");
             Assert.AreEqual("Luis", ObjPersona.darNombre());
         }
 
@@ -60,7 +60,7 @@ namespace uTestAlcancia
         public void uTestPonerAlcancia()
         {
             ObjPersona = new clsPersona();
-            ObjPersona.poner(ObjAlcancia);
+            ObjPersona.asociarAlcanciaCon(ObjAlcancia);
             Assert.AreEqual(ObjAlcancia, ObjPersona.darAlcancia());
         }
 
@@ -72,22 +72,22 @@ namespace uTestAlcancia
         public void uTestAsociarMoneda()
         {
             clsPersona Objeto = new clsPersona();
-            Objeto.Generar();
+            Objeto.generar();
             clsMoneda ObjAsociado = new clsMoneda(200, 2012);
-            Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
+          //  Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
             clsMoneda ObjEsperado = new clsMoneda();
-            Assert.AreEqual(true, Objeto.recuperar(200, ref ObjEsperado));
+            Assert.AreEqual(true, Objeto.recuperarMonedaCon(200));
             Assert.AreEqual(ObjEsperado, ObjAsociado);
         }
         [TestMethod]
         public void uTestAsociarBillete()
         {
             clsPersona Objeto = new clsPersona();
-            Objeto.Generar();
-            clsBillete ObjAsociado = new clsBillete(10000, 2000, 05, 12, "10031");
-            Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
+            Objeto.generar();
+            clsBillete ObjAsociado = new clsBillete("10031",10000, 2000, 05, 12);
+            //Assert.AreEqual(true, Objeto.asociar(ObjAsociado));
             clsBillete ObjEsperado = new clsBillete();
-            Assert.AreEqual(true, Objeto.recuperar(10000, ref ObjEsperado));
+            Assert.AreEqual(true, Objeto.recuperarBilleteCon(10000));
             Assert.AreEqual(ObjEsperado, ObjAsociado);
         }
 
@@ -98,9 +98,9 @@ namespace uTestAlcancia
         public void uTestDisociarMoneda()
         {
             clsPersona Objeto = new clsPersona();
-            Objeto.Generar();
+            Objeto.generar();
             clsMoneda ObjAsociado = null;
-            Assert.AreEqual(true, Objeto.disociarMonedaCon(100, ref ObjAsociado));
+            Assert.AreEqual(true, Objeto.disociarMonedaCon(100));
             Assert.AreEqual(100, ObjAsociado.darDenominacion());
         }
 
@@ -108,9 +108,9 @@ namespace uTestAlcancia
         public void uTestDisociarBillete()
         {
             clsPersona Objeto = new clsPersona();
-            Objeto.Generar();
+            Objeto.generar();
             clsBillete ObjAsociado = null;
-            Assert.AreEqual(true, Objeto.disociarBilleteCon(1000, ref ObjAsociado));
+            Assert.AreEqual(true, Objeto.disociarBilleteCon(1000));
             Assert.AreEqual(1000, ObjAsociado.darDenominacion());
         }
         #endregion
@@ -122,8 +122,8 @@ namespace uTestAlcancia
 
             ObjPersona = new clsPersona();
             ObjMoneda = new clsMoneda();
-            ObjPersona.Generar();
-            Assert.AreNotEqual(false, ObjPersona.recuperar(500, ref ObjMoneda));
+            ObjPersona.generar();
+            Assert.AreNotEqual(false, ObjPersona.recuperarMonedaCon(500));
 
         }
 
@@ -133,8 +133,8 @@ namespace uTestAlcancia
 
             ObjPersona = new clsPersona();
             ObjBillete = new clsBillete();
-            ObjPersona.Generar();
-            Assert.AreNotEqual(false, ObjPersona.recuperar(1000, ref ObjBillete));
+            ObjPersona.generar();
+            Assert.AreNotEqual(false, ObjPersona.recuperarBilleteCon(1000));
 
         }
         #endregion

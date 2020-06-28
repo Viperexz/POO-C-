@@ -36,6 +36,17 @@
         //=================================================
         #region Metodos
 
+        #region Utilitario
+        public void generar()
+        {
+            atrAño = 1973;
+            atrMes = 11;
+            atrDia = 4;
+            atrSerial = "QWERTY123";
+
+        }
+        #endregion
+
         #region Constructor
         /// <summary>
         /// Crea y devuelve una nueva instancia (objeto de Billete - No parametrizado).
@@ -52,7 +63,7 @@
         /// <param name="prmMes">Mes de Emisión</param>
         /// <param name="prmAño">Año de Emisión.</param>
         /// <param name="prmSerial">Número de Serie.</param
-        public clsBillete(int prmDenominacion, int prmAño, int prmMes, int prmDia, string prmSerial)
+        public clsBillete(string prmSerial,int prmDenominacion, int prmDia, int prmMes, int prmAño )
         {
             atrDenominacion = prmDenominacion;
             atrAño = prmAño;
@@ -90,6 +101,11 @@
             return atrSerial;
         }
         #endregion
+
+        public clsBillete destruir()
+        {
+            return null;
+        }
 
         #endregion
     }
