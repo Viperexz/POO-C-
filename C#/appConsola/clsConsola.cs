@@ -12,7 +12,7 @@ namespace appConsola.Dominio
 		public void EsperarTecla()
 		{
 			Console.WriteLine("Presione cualquier tecla...");
-			Console.ReadLine();
+			Console.ReadKey();
 		}
 
 		public void Escribir(string prmEtiqueta)

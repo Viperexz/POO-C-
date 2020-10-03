@@ -8,24 +8,26 @@ namespace appConsola.Dominio
 {
 	public class appAlcancia
 	{
-		//Variables locales
-		int atrDenomincionesAceptadas = 0;
+        #region Asociativos
+        //Variables locales
+        int atrDenomincionesAceptadas = 0;
 		clsConsola atrConsola = new clsConsola();
 		clsSistema atrSistema = new clsSistema();
-		public int atrCapacidadMonedas=0,atrCapacidadBilletes=0,atrNumerodeMonedas=0,atrIndicedellenado=0;
+		public int atrCapacidadMonedas=0,atrCapacidadBilletes=0,atrNumerodeMonedas=0;
+		float atrIndicedellenado = 0;
 		List<int> vecDenominaciones = new List<int>();
 		List<clsMoneda> atrHistorialMonedas = new List<clsMoneda>();
 		List<clsBillete> atrHistorialBilletes = new List<clsBillete>();
+        #endregion
 
-
-
-		public void ImpTotalMonedas()
+        #region Impresion
+        public void ImpTotalMonedas()
 		{
-			atrConsola.EscribirCon("El valor de <Numero Total de Monedas> es"+atrNumerodeMonedas+"\n");
+			atrConsola.EscribirCon("El valor de <Numero Total de Monedas> es: "+atrNumerodeMonedas+"\n");
 		}
 		public void ImpTotalBilletes()
 		{
-			atrConsola.EscribirCon("El valor de <Numero Total de Monedas> es"+ atrSistema.darBilletes().Count +"\n");
+			atrConsola.EscribirCon("El valor de <Numero Total de Monedas> es: "+ atrSistema.darBilletes().Count +"\n");
 		}
 
 		public void ImpSaldoTotal()
@@ -34,12 +36,7 @@ namespace appConsola.Dominio
 			for (int varContador1 = 0; varContador1 < atrSistema.darMonedas().Count; varContador1++)
 			{
 				atrSaldoTotal = atrSaldoTotal + (atrSistema.darMonedas()[varContador1].darDenominacion());
-			}
-			for (int varContador1 = 0; varContador1 < atrSistema.darBilletes().Count; varContador1++)
-			{
-				atrSaldoTotal = atrSaldoTotal + (atrSistema.darBilletes()[varContador1].darDenominacion());
-
-				atrConsola.EscribirCon("El valor de <Saldo Total de Monedas> es" + atrSaldoTotal + "\n");
+				atrConsola.EscribirCon("El valor de <Saldo Total de Monedas> es: " + atrSaldoTotal + "\n");
 			}
 		}
 
@@ -50,16 +47,26 @@ namespace appConsola.Dominio
 			{
 				atrIndicedellenado = (atrNumerodeMonedas * 100) / atrCapacidadMonedas;
 			}
-			atrConsola.Escribir("El valor de <Indice (%) de llenado de Alcancia> es: " + atrIndicedellenado + "\n");
+			atrConsola.EscribirCon("El valor de <Indice (%) de llenado de Alcancia> es: " + atrIndicedellenado + "\n");
 			atrConsola.EsperarTecla();
 		}
 
 		public void ImpresionVectorDenominaciones()
 		{
+			int varAux = 0;
 			atrConsola.EscribirCon("AVISO: Impresion de Datos Provenientes del Vector <Cantidad Monedas x Denominacion de>\n");
-			for (int varContador1 = 0; varContador1 < atrDenomincionesAceptadas; varContador1++)
+			for (int varContador1 = 0; varContador1 < atrSistema.darMonedas().Count; varContador1++)
 			{
-				Console.WriteLine("Cantidad Monedas x Denominacion de [" + vecDenominaciones[varContador1]+"]\n");
+				if (vecDenominaciones[varContador1] == atrSistema.darMonedas()[varContador1].darDenominacion())
+                {
+					varAux++;
+                }
+                else
+                {
+					Console.WriteLine("Cantidad Monedas x Denominacion de [" + vecDenominaciones[varContador1] + "] " + 0 + "\n");
+				}
+				Console.WriteLine("Cantidad Monedas x Denominacion de [" + vecDenominaciones[varContador1]+"] "+varAux+"\n");
+				varAux = 0;
 			}
 			atrConsola.Escribir("-------------------------------------------------------------------------------\n");
 			atrConsola.EsperarTecla();
@@ -70,7 +77,7 @@ namespace appConsola.Dominio
 			atrConsola.EscribirCon("AVISO: Impresion de Datos Provenientes del Vector <Saldo Monedas x Denominacion de>\n");
 			for (int varContador = 0; varContador <atrNumerodeMonedas; varContador++)
 			{
-				Console.WriteLine("Saldo monedas x Denominaciones>\n" + vecDenominaciones[varContador], (vecDenominaciones[varContador] * atrSistema.darMonedas()[varContador].darDenominacion()));
+				Console.WriteLine("<Saldo monedas x Denominaciones>" + vecDenominaciones[varContador], (vecDenominaciones[varContador] * atrSistema.darMonedas()[varContador].darDenominacion()));
 			}
 			atrConsola.Escribir("-------------------------------------------------------------------------------\n");
 			atrConsola.EsperarTecla();
@@ -99,12 +106,12 @@ namespace appConsola.Dominio
 			atrConsola.Escribir("-------------------------------------------------------------------------------\n");
 			atrConsola.EsperarTecla();
 		}
+        #endregion
 
+        #region mnuPreferencias
+        //MENU PREFERENCIAS *******************************************************************************
 
-
-		//MENU PREFERENCIAS *******************************************************************************
-
-		public void CapacidadMonedas()
+        public void CapacidadMonedas()
 		{
 			atrConsola.Limpiarpantalla(); 
 			atrConsola.EscribirCon("Ejecutando: CONFIGURAR LA CAPACIDAD EN MONEDAS PARA LA ALCANCIA\n");
@@ -142,7 +149,7 @@ namespace appConsola.Dominio
 				for (int varContadorIn = 0; varContadorIn < atrDenomincionesAceptadas; varContadorIn++)
 				{
 					int atrAux;
-					atrAux = atrConsola.LeerEntero("Ingrese un valor entre [1..1000] para <Denominacion> [" + varContadorIn + "]");
+					atrAux = atrConsola.LeerEntero("Ingrese un valor entre [1..1000] para <Denominacion> [" + varContadorIn + "] ");
 					if (atrAux > 1000)
 					{
 						atrConsola.EscribirCon("ALERTA: Valor superado\n");
@@ -159,28 +166,39 @@ namespace appConsola.Dominio
 
 		public void PreferenciasAlcanciaMenu2()
 		{
+			int varAux = 0;
 			atrConsola.Limpiarpantalla();
 			atrConsola.EscribirCon("Ejecutando: PreferenciasAlcancia\n");
 			atrConsola.Escribir("El valor de <Capacidad de Monedas> es: "+ atrCapacidadMonedas+"\n");
-			atrConsola.Escribir("El valor de <Capacidad de Billetes> es: "+ atrCapacidadBilletes + "\n");
 			atrConsola.Escribir("El valor de <Numero Total de Monedas> es: "+ atrNumerodeMonedas + "\n");
 			ImpSaldoTotal();
 			atrIndicedellenado = (atrNumerodeMonedas * 100) / atrCapacidadMonedas;
 			atrConsola.Escribir("El valor de <Indice (%) de llenado de Alcancia> es: "+atrIndicedellenado + "\n");
 			atrConsola.Escribir("El valor de <Denomiaciones aceptadas> es; "+ atrDenomincionesAceptadas + "\n");
-			atrConsola.EscribirCon("[AVISO: Impresion de Datos Provenientes del Vector <Cantidad Monedas x Denominacion de>]" + "\n");
-			for (int varContador = 0; varContador < vecDenominaciones.Count; varContador++)
-			{ 
-				Console.WriteLine("<Denominaciones [" + varContador + "]:-"+vecDenominaciones[varContador]+">");
+			atrConsola.EscribirCon("[AVISO: Impresion de Datos Provenientes del Vector <Cantidad Monedas x Denominacion de>] " + "\n");
+			for (int varContador1 = 0; varContador1 < atrSistema.darMonedas().Count; varContador1++)
+			{
+				if (vecDenominaciones[varContador1] == atrSistema.darMonedas()[varContador1].darDenominacion())
+				{
+					varAux++;
+				}
+				else
+				{
+					Console.WriteLine("Cantidad Monedas x Denominacion de [" + vecDenominaciones[varContador1] + "] " + 0 + "\n");
+				}
+				Console.WriteLine("Cantidad Monedas x Denominacion de [" + vecDenominaciones[varContador1] + "] " + varAux + "\n");
+				varAux = 0;
 			}
 			atrConsola.EscribirCon("AVISO: Final de Datos Vector\n");
 			atrConsola.EsperarTecla();
 			atrConsola.Limpiarpantalla();
 		}
+        #endregion
 
-		//MENU EXTRACTOS *******************************************************************************
+        #region mnuExtractos
+        //MENU EXTRACTOS *******************************************************************************
 
-		public void PrimeraOpcion()
+        public void PrimeraOpcion()
 		{
 			atrConsola.Limpiarpantalla();
 			atrConsola.EscribirCon("Ejecutando: EXTRACTO DE SALDO Y CANTIDAD TOTAL DE MONEDAS\n");
@@ -223,10 +241,12 @@ namespace appConsola.Dominio
 			ImpVecHistorial();
 			atrConsola.Limpiarpantalla();
 		}
+        #endregion
 
-		//MENU PRINCIPAL *******************************************************************************
+        #region mnuPrincipal
+        //MENU PRINCIPAL *******************************************************************************
 
-		public void IngresarMoneda()
+        public void IngresarMoneda()
 		{
 			atrConsola.Limpiarpantalla();
 			int varDenominacion = 0, varAño=0, varAux2 = 0;
@@ -239,7 +259,7 @@ namespace appConsola.Dominio
 
 			}
 			varDenominacion = atrConsola.LeerEntero("");
-			atrConsola.Escribir("Ingrese el año de creacion de la moneda\n");
+			atrConsola.Escribir("Ingrese el año de creacion de la moneda");
 			varAño = atrConsola.LeerEntero("");
 			if (atrNumerodeMonedas >= atrCapacidadMonedas)
 			{
@@ -261,9 +281,14 @@ namespace appConsola.Dominio
 						atrConsola.EscribirCon("CONFIRMACION: La Moneda ha sido ingresada exitosamente.\n");
 						atrNumerodeMonedas++;
 					}
+                    else
+                    {
+						atrConsola.EscribirCon("Aviso:La denominacion ingresada no existe.\n");
+					}
 				}
 				ImpresionVectorDenominaciones();
 				ImprimirDatosParciales();
+				atrConsola.Limpiarpantalla();
 
 			}
 
@@ -305,5 +330,7 @@ namespace appConsola.Dominio
 			atrConsola.Limpiarpantalla();
 		}
 
-	}
+        #endregion
+
+    }
 }
